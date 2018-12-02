@@ -72,6 +72,14 @@
 		</description>
 	</globalProperty>
 	/Required Global Properties -->
+
+    <globalProperty>
+        <property>@MODULE_ID@.omhOnFhirAPIBase</property>
+        <defaultValue>/</defaultValue>
+        <description>
+            The URL of Drishti-cog. Typically the root URL if Drishti docker-compose is being used.
+        </description>
+    </globalProperty>
 	
 	<!--
 	<dwr>
