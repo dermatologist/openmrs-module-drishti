@@ -9,6 +9,10 @@
  */
 package org.openmrs.module.drishti.api;
 
+import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.openmrs.annotation.Authorized;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
@@ -45,4 +49,9 @@ public interface DrishtiService extends OpenmrsService {
 	@Authorized(DrishtiConfig.MODULE_PRIVILEGE)
 	@Transactional
 	Item saveItem(Item item) throws APIException;
+
+	Bundle getBundle(Patient patient, ResourceType resourceType);
+
+	Boolean saveBundle(Bundle bundle, Resource resource);
+
 }
