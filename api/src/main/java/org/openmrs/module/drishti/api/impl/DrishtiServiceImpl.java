@@ -9,19 +9,33 @@
  */
 package org.openmrs.module.drishti.api.impl;
 
+import ca.uhn.fhir.rest.client.api.IGenericClient;
+import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.dstu3.model.Resource;
+import org.hl7.fhir.dstu3.model.ResourceType;
 import org.openmrs.api.APIException;
+import org.openmrs.api.AdministrationService;
 import org.openmrs.api.UserService;
 import org.openmrs.api.impl.BaseOpenmrsService;
+import org.openmrs.module.drishti.DrishtiActivator;
 import org.openmrs.module.drishti.Item;
 import org.openmrs.module.drishti.api.DrishtiService;
 import org.openmrs.module.drishti.api.dao.DrishtiDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiService {
 	
 	DrishtiDao dao;
 	
 	UserService userService;
-	
+
+	@Autowired
+	AdministrationService administrationService;
+
+
 	/**
 	 * Injected in moduleApplicationContext.xml
 	 */
@@ -48,5 +62,25 @@ public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiSer
 		}
 		
 		return dao.saveItem(item);
+	}
+
+	@Override
+	public Bundle getBundle(Patient patient, ResourceType resourceType){
+		String serverBase = administrationService.getGlobalProperty("omhOnFhirAPIBase", "/") + "/ProcessBundle";
+		IGenericClient client = DrishtiActivator.getCtx().newRestfulGenericClient(serverBase);
+
+		// TODO: To change this (placeholder)
+		Bundle results = client
+				.search()
+				.forResource(Patient.class)
+				.where(Patient.FAMILY.matches().value("duck"))
+				.returnBundle(org.hl7.fhir.dstu3.model.Bundle.class)
+				.execute();
+		return results;
+	}
+
+	@Override
+	public Boolean saveBundle(Bundle bundle, Resource resource){
+		return true;
 	}
 }
