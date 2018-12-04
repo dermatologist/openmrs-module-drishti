@@ -9,10 +9,8 @@
  */
 package org.openmrs.module.drishti.api;
 
-import org.hl7.fhir.dstu3.model.Bundle;
-import org.hl7.fhir.dstu3.model.Patient;
-import org.hl7.fhir.dstu3.model.Resource;
-import org.hl7.fhir.dstu3.model.ResourceType;
+import ca.uhn.fhir.model.primitive.IdDt;
+import org.hl7.fhir.dstu3.model.*;
 import org.openmrs.annotation.Authorized;
 import org.openmrs.api.APIException;
 import org.openmrs.api.OpenmrsService;
@@ -52,6 +50,6 @@ public interface DrishtiService extends OpenmrsService {
 
 	Bundle getBundle(Patient patient, ResourceType resourceType);
 
-	Boolean saveBundle(Bundle bundle, Resource resource);
+	IdDt saveCareplan(CarePlan carePlan, Patient patient);
 
 }
