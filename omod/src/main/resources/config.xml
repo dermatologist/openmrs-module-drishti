@@ -80,6 +80,13 @@
             The URL of Drishti-cog. Typically the root URL if Drishti docker-compose is being used.
         </description>
     </globalProperty>
+	<globalProperty>
+		<property>@MODULE_ID@.urnSystem</property>
+		<defaultValue>urn:system</defaultValue>
+		<description>
+			The Identifier system as a URN.
+		</description>
+	</globalProperty>
 	
 	<!--
 	<dwr>

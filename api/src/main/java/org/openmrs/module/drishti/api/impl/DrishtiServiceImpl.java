@@ -9,10 +9,12 @@
  */
 package org.openmrs.module.drishti.api.impl;
 
-import ca.uhn.fhir.model.primitive.IdDt;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
-import org.hl7.fhir.dstu3.model.*;
+import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.CarePlan;
+import org.hl7.fhir.dstu3.model.Patient;
+import org.hl7.fhir.dstu3.model.Reference;
 import org.openmrs.api.APIException;
 import org.openmrs.api.AdministrationService;
 import org.openmrs.api.UserService;
@@ -36,6 +38,7 @@ public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiSer
 
 
     String serverBase = administrationService.getGlobalProperty("omhOnFhirAPIBase", "/") + "/ProcessBundle";
+    String urnSystem = administrationService.getGlobalProperty("urnSystem", "urn:system");
     IGenericClient client = DrishtiActivator.getCtx().newRestfulGenericClient(serverBase);
 
 
@@ -68,33 +71,25 @@ public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiSer
 	}
 
 	@Override
-	public Bundle getBundle(Patient patient, ResourceType resourceType){
-		// TODO: To change this (placeholder)
-//		Bundle results = client
-//				.search()
-//				.forResource(Patient.class)
-//				.where(Patient.FAMILY.matches().value("duck"))
-//				.returnBundle(org.hl7.fhir.dstu3.model.Bundle.class)
-//				.execute();
-
-		Bundle results = client
+    public Bundle getBundle(org.openmrs.Patient patient) {
+        Bundle bundle = client
 				.search()
-                .forResource(Observation.class)
-                .where(Observation.SUBJECT.hasId(patient.getId()))
+                .forResource(Bundle.class)
+                .where(Bundle.IDENTIFIER.exactly().systemAndIdentifier(urnSystem, patient.getUuid()))
+                //.where(Observation.SUBJECT.hasId(patient.getId()))
 				.returnBundle(org.hl7.fhir.dstu3.model.Bundle.class)
 				.execute();
-		return results;
+        return bundle;
 	}
 
 	@Override
-    public IdDt saveCareplan(CarePlan carePlan, Patient patient) {
+    public Boolean saveCareplan(CarePlan carePlan, Patient patient) {
         carePlan.setSubject(new Reference(patient));
         MethodOutcome outcome = client.create()
                 .resource(carePlan)
                 .prettyPrint()
                 .encodedJson()
                 .execute();
-        IdDt id = (IdDt) outcome.getId();
-        return id;
+        return outcome.getCreated();
 	}
 }
