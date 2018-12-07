@@ -17,63 +17,47 @@ import org.hl7.fhir.dstu3.model.CarePlan;
 import org.hl7.fhir.dstu3.model.Patient;
 import org.hl7.fhir.dstu3.model.Reference;
 import org.openmrs.api.APIException;
-import org.openmrs.api.AdministrationService;
 import org.openmrs.api.UserService;
-import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
-import org.openmrs.module.drishti.DrishtiActivator;
+import org.openmrs.module.drishti.DrishtiConstants;
 import org.openmrs.module.drishti.Item;
 import org.openmrs.module.drishti.api.DrishtiService;
 import org.openmrs.module.drishti.api.dao.DrishtiDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiService {
 	
 	DrishtiDao dao;
-	
+
 	UserService userService;
 
 
-	AdministrationService administrationService;
+	IGenericClient client = FhirContext.forDstu3().newRestfulGenericClient(DrishtiConstants.FHIR_BASE);
 
-	String serverBase = "/fhir";
-	String urnSystem = "urn:system";
-	IGenericClient client;
-
-	public DrishtiServiceImpl() {
-		super();
-		administrationService = Context.getAdministrationService();
-		serverBase = administrationService.getGlobalProperty("omhOnFhirAPIBase", "/fhir") + "/ProcessBundle";
-		urnSystem = administrationService.getGlobalProperty("urnSystem", "urn:system");
-		client = FhirContext.forDstu3().newRestfulGenericClient(serverBase);
-
-	}
 	/**
 	 * Injected in moduleApplicationContext.xml
 	 */
 	public void setDao(DrishtiDao dao) {
 		this.dao = dao;
 	}
-	
+
 	/**
 	 * Injected in moduleApplicationContext.xml
 	 */
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
-	
+
 	@Override
 	public Item getItemByUuid(String uuid) throws APIException {
 		return dao.getItemByUuid(uuid);
 	}
-	
+
 	@Override
 	public Item saveItem(Item item) throws APIException {
 		if (item.getOwner() == null) {
 			item.setOwner(userService.getUser(1));
 		}
-		
+
 		return dao.saveItem(item);
 	}
 
@@ -82,7 +66,7 @@ public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiSer
         Bundle bundle = client
 				.search()
                 .forResource(Bundle.class)
-                .where(Bundle.IDENTIFIER.exactly().systemAndIdentifier(urnSystem, patient.getUuid()))
+				.where(Bundle.IDENTIFIER.exactly().systemAndIdentifier(DrishtiConstants.URN_SYSTEM, patient.getUuid()))
                 //.where(Observation.SUBJECT.hasId(patient.getId()))
 				.returnBundle(org.hl7.fhir.dstu3.model.Bundle.class)
 				.execute();

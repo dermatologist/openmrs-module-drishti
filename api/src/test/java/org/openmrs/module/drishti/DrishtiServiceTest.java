@@ -7,7 +7,7 @@
  * Copyright (C) OpenMRS Inc. OpenMRS is a registered trademark and the OpenMRS
  * graphic logo is a trademark of OpenMRS Inc.
  */
-package org.openmrs.module.drishti.api;
+package org.openmrs.module.drishti;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,12 +16,13 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.openmrs.User;
 import org.openmrs.api.UserService;
-import org.openmrs.module.drishti.Item;
 import org.openmrs.module.drishti.api.dao.DrishtiDao;
 import org.openmrs.module.drishti.api.impl.DrishtiServiceImpl;
-import static org.mockito.Mockito.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+
+import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.when;
 
 /**
  * This is a unit test, which verifies logic in DrishtiService. It doesn't extend
