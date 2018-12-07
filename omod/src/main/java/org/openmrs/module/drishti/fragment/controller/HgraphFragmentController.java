@@ -14,8 +14,8 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public class HgraphFragmentController {
-    public void controller(FragmentConfiguration config,
-                           @SpringBean("patientService") PatientService patientService,
+
+    public void controller(FragmentConfiguration config, @SpringBean("patientService") PatientService patientService,
                            FragmentModel model) throws Exception {
         // unfortunately in OpenMRS 2.1 the coreapps patient page only gives us a patientId for this extension point
         // (not a patient) but I assume we'll fix this to pass patient, so I'll code defensively

@@ -20,9 +20,8 @@ import org.openmrs.api.OpenmrsService;
  */
 public interface DrishtiService extends OpenmrsService {
 
+    Bundle getBundle(org.openmrs.Patient patient);
 
-	Bundle getBundle(org.openmrs.Patient patient);
-
-	Boolean saveCareplan(CarePlan carePlan, Patient patient);
+    Boolean saveCareplan(CarePlan carePlan, Patient patient);
 
 }

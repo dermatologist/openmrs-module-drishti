@@ -14,19 +14,19 @@ import org.springframework.stereotype.Repository;
 @Repository("drishti.DrishtiDao")
 public class DrishtiDao {
 
-//	@Autowired
-//	DbSessionFactory sessionFactory;
-//
-//	private DbSession getSession() {
-//		return sessionFactory.getCurrentSession();
-//	}
-//
-//	public Item getItemByUuid(String uuid) {
-//		return (Item) getSession().createCriteria(Item.class).add(Restrictions.eq("uuid", uuid)).uniqueResult();
-//	}
-//
-//	public Item saveItem(Item item) {
-//		getSession().saveOrUpdate(item);
-//		return item;
-//	}
+    //	@Autowired
+    //	DbSessionFactory sessionFactory;
+    //
+    //	private DbSession getSession() {
+    //		return sessionFactory.getCurrentSession();
+    //	}
+    //
+    //	public Item getItemByUuid(String uuid) {
+    //		return (Item) getSession().createCriteria(Item.class).add(Restrictions.eq("uuid", uuid)).uniqueResult();
+    //	}
+    //
+    //	public Item saveItem(Item item) {
+    //		getSession().saveOrUpdate(item);
+    //		return item;
+    //	}
 }

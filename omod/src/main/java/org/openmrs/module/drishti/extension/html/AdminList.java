@@ -9,15 +9,16 @@
  */
 package org.openmrs.module.drishti.extension.html;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.openmrs.module.Extension;
 import org.openmrs.module.web.extension.AdministrationSectionExt;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This class defines the links that will appear on the administration page under the
- * "drishti.title" heading. This extension is enabled by defining (uncommenting) it in the config.xml file.
+ * "drishti.title" heading. This extension is enabled by defining (uncommenting) it in the
+ * config.xml file.
  */
 public class AdminList extends AdministrationSectionExt {
 	
@@ -45,7 +46,7 @@ public class AdminList extends AdministrationSectionExt {
 		map.put("module/drishti/drishti.form", "drishti.title");
 		map.put("drishti/drishti.page", "drishti.refapp.title");
 
-		return map;
+        return map;
 	}
 	
 }

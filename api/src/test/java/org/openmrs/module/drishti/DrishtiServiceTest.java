@@ -26,7 +26,6 @@ public class DrishtiServiceTest {
 	@InjectMocks
 	DrishtiServiceImpl basicModuleService;
 
-
 	@Mock
 	UserService userService;
 	

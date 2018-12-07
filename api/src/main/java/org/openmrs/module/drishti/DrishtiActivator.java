@@ -9,28 +9,28 @@
  */
 package org.openmrs.module.drishti;
 
-import ca.uhn.fhir.context.FhirContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.Role;
 import org.openmrs.api.UserService;
 import org.openmrs.api.context.Context;
 import org.openmrs.module.BaseModuleActivator;
+
 /**
  * This class contains the logic that is run every time this module is either started or shutdown
  */
 public class DrishtiActivator extends BaseModuleActivator {
 	
 	private Log log = LogFactory.getLog(this.getClass());
-
-    /*
-    Note that FhirContext is an expensive object to create,
-    so you should try to keep an instance around for the lifetime of your application.
-    It is thread-safe so it can be passed as needed.
-    Client instances, on the other hand, are very inexpensive to create
-    so you can create a new one for each request if needed
-    (although there is no requirement to do so, clients are reusable and thread-safe as well).
-     */
+	
+	/*
+	Note that FhirContext is an expensive object to create,
+	so you should try to keep an instance around for the lifetime of your application.
+	It is thread-safe so it can be passed as needed.
+	Client instances, on the other hand, are very inexpensive to create
+	so you can create a new one for each request if needed
+	(although there is no requirement to do so, clients are reusable and thread-safe as well).
+	 */
     //private static FhirContext ctx = null;
 	
 	/**
@@ -47,16 +47,16 @@ public class DrishtiActivator extends BaseModuleActivator {
 		log.info("Shutdown Drishti");
 	}
 
-//    public static FhirContext getCtx() {
-//        return ctx;
-//    }
+    //    public static FhirContext getCtx() {
+    //        return ctx;
+    //    }
 
     /**
      * @see BaseModuleActivator#contextRefreshed()
      */
     @Override
     public void contextRefreshed() {
-        super.contextRefreshed();    //To change body of overridden methods use File | Settings | File Templates.
+        super.contextRefreshed(); //To change body of overridden methods use File | Settings | File Templates.
         ensureRolesAreCreated();
         // Start the fhir context when the context is refreshed.
         //startFhirContext();
@@ -81,8 +81,8 @@ public class DrishtiActivator extends BaseModuleActivator {
         userService.saveRole(patientportalbasicrole);
     }
 
-//    private void startFhirContext() {
-//        log.info("Starting FhirContext");
-//        ctx = FhirContext.forDstu3();
-//    }
+    //    private void startFhirContext() {
+    //        log.info("Starting FhirContext");
+    //        ctx = FhirContext.forDstu3();
+    //    }
 }

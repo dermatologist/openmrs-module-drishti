@@ -8,26 +8,31 @@ import org.openmrs.Patient;
 
 public class FHIRRESTfulGenericClientTest {
 
-    FHIRRESTfulGenericClient fhirresTfulGenericClient;
+	FHIRRESTfulGenericClient fhirresTfulGenericClient;
 
-    @Before
-    public void setUp() throws Exception {
-        fhirresTfulGenericClient = new FHIRRESTfulGenericClient();
-    }
+	@Before
+	public void setUp() throws Exception {
+		fhirresTfulGenericClient = new FHIRRESTfulGenericClient();
+	}
 
-    @After
-    public void tearDown() throws Exception {
-    }
+	@After
+	public void tearDown() throws Exception {
+	}
 
-    @Test
-    public void getBundleClient() {
-        Patient patient = new Patient();
-        patient.setUuid("44018401-fef3-4bd7-8cb9-6391491a470a");
-        Bundle bundle = fhirresTfulGenericClient.getBundleClient(patient);
-        System.out.println(bundle.getId());
-    }
+	@Test
+	public void getBundleClient() {
+		Patient patient = new Patient();
+		patient.setUuid("44018401-fef3-4bd7-8cb9-6391491a470a");
+		Bundle bundle = fhirresTfulGenericClient.getBundleClient(patient);
+		System.out.println(bundle.getId());
+	}
 
-    @Test
-    public void saveCareplanClient() {
-    }
+	@Test
+	public void saveCareplanClient() {
+		Bundle bundle = new Bundle();
+		Bundle.BundleEntryComponent bundleEntryComponent = new Bundle.BundleEntryComponent();
+		Patient patient = new Patient();
+		patient.setUuid("44018401-fef3-4bd7-8cb9-6391491a470a");
+
+	}
 }
