@@ -9,6 +9,7 @@
  */
 package org.openmrs.module.drishti.api.impl;
 
+import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
 import org.hl7.fhir.dstu3.model.Bundle;
@@ -18,6 +19,7 @@ import org.hl7.fhir.dstu3.model.Reference;
 import org.openmrs.api.APIException;
 import org.openmrs.api.AdministrationService;
 import org.openmrs.api.UserService;
+import org.openmrs.api.context.Context;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.openmrs.module.drishti.DrishtiActivator;
 import org.openmrs.module.drishti.Item;
@@ -26,22 +28,26 @@ import org.openmrs.module.drishti.api.dao.DrishtiDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
 public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiService {
 	
 	DrishtiDao dao;
 	
 	UserService userService;
 
-	@Autowired
+
 	AdministrationService administrationService;
 
+	String serverBase = "/fhir";
+	String urnSystem = "urn:system";
+	IGenericClient client;
 
-    String serverBase = administrationService.getGlobalProperty("omhOnFhirAPIBase", "/") + "/ProcessBundle";
-    String urnSystem = administrationService.getGlobalProperty("urnSystem", "urn:system");
-    IGenericClient client = DrishtiActivator.getCtx().newRestfulGenericClient(serverBase);
+	public DrishtiServiceImpl() {
+		administrationService = Context.getAdministrationService();
+		String serverBase = administrationService.getGlobalProperty("omhOnFhirAPIBase", "/fhir") + "/ProcessBundle";
+		String urnSystem = administrationService.getGlobalProperty("urnSystem", "urn:system");
+		IGenericClient client = FhirContext.forDstu3().newRestfulGenericClient(serverBase);
 
-
+	}
 	/**
 	 * Injected in moduleApplicationContext.xml
 	 */

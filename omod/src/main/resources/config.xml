@@ -75,7 +75,7 @@
 
     <globalProperty>
         <property>@MODULE_ID@.omhOnFhirAPIBase</property>
-        <defaultValue>/</defaultValue>
+        <defaultValue>/fhir</defaultValue>
         <description>
             The URL of Drishti-cog. Typically the root URL if Drishti docker-compose is being used.
         </description>
