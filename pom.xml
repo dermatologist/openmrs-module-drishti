@@ -38,6 +38,22 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+			<!-- slf4j -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4jApiVersion}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4jLog4j12Version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+
             <dependency>
                 <groupId>ca.uhn.hapi.fhir</groupId>
                 <artifactId>hapi-fhir-base</artifactId>
@@ -116,5 +132,7 @@
 		<openmrsPlatformVersion>1.11.6</openmrsPlatformVersion>
         <hapiFhirBaseVersion>3.6.0</hapiFhirBaseVersion>
         <hapiFhirStructuresDstuVersion>3.6.0</hapiFhirStructuresDstuVersion>
+		<slf4jApiVersion>1.6.0</slf4jApiVersion>
+		<slf4jLog4j12Version>1.6.0</slf4jLog4j12Version>
 	</properties>
 </project>
