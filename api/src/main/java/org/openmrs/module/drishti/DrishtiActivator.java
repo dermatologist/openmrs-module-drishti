@@ -31,7 +31,7 @@ public class DrishtiActivator extends BaseModuleActivator {
     so you can create a new one for each request if needed
     (although there is no requirement to do so, clients are reusable and thread-safe as well).
      */
-    private static FhirContext ctx = null;
+    //private static FhirContext ctx = null;
 	
 	/**
 	 * @see #started()
@@ -47,9 +47,9 @@ public class DrishtiActivator extends BaseModuleActivator {
 		log.info("Shutdown Drishti");
 	}
 
-    public static FhirContext getCtx() {
-        return ctx;
-    }
+//    public static FhirContext getCtx() {
+//        return ctx;
+//    }
 
     /**
      * @see BaseModuleActivator#contextRefreshed()
@@ -59,7 +59,7 @@ public class DrishtiActivator extends BaseModuleActivator {
         super.contextRefreshed();    //To change body of overridden methods use File | Settings | File Templates.
         ensureRolesAreCreated();
         // Start the fhir context when the context is refreshed.
-        startFhirContext();
+        //startFhirContext();
     }
 
     /**
@@ -81,8 +81,8 @@ public class DrishtiActivator extends BaseModuleActivator {
         userService.saveRole(patientportalbasicrole);
     }
 
-    private void startFhirContext() {
-        log.info("Starting FhirContext");
-        ctx = FhirContext.forDstu3();
-    }
+//    private void startFhirContext() {
+//        log.info("Starting FhirContext");
+//        ctx = FhirContext.forDstu3();
+//    }
 }
