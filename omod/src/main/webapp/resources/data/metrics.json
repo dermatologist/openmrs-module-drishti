@@ -82,12 +82,12 @@
         "name": "Exercise",
         "features": {
           "healthyrange": [
-            35,
-            63
+            3500,
+            7000
           ],
           "totalrange": [
             0,
-            120
+            12000
           ],
           "boundayflags": [
             false,

@@ -16,7 +16,7 @@
 <script>
     (function () {
         // Mean value passed by the controller
-        var gender = '${ person.gender }';
+        var gender = '${ patient.gender }';
         var glucose = 120;
         var weight = 74;
         var steps = ${steps};
@@ -28,7 +28,7 @@
                     var token = jQuery("meta[name='csrf-token']").attr("content");
                     xhr.setRequestHeader("X-CSRF-Token", token);
                 },
-                url: '/openmrs/ms/uiframework/resource/patientportaltoolkit/data/metrics.json',
+                url: '/openmrs/ms/uiframework/resource/drishti/data/metrics.json',
                 dataType: 'json',
                 async: true,
                 complete: function (jqXHR) {
@@ -131,7 +131,7 @@
                                     factors_array.push(
                                         {
                                             label: factor_json[i].name,
-                                            score: HGraph.prototype.calculateScoreFromValue(factor_json[i].features, exercise),
+                                            score: HGraph.prototype.calculateScoreFromValue(factor_json[i].features, steps),
                                             value: parseFloat(steps).toFixed(2) + ' ' + factor_json[i].features.unitlabel,
                                             weight: factor_json[i].features.weight
                                         }
@@ -156,8 +156,8 @@
                             };
                             console.log(opts);
                             graph = new HGraph(opts);
-                            graph.width = 760;
-                            graph.height = 602;
+                            graph.width = 300;
+                            graph.height = 250;
                             graph.initialize();
                         }
                     }
@@ -199,7 +199,7 @@
         <small>
             <div id="hgraph-tab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
                 <div>
-                    Gender: ${person.gender} |
+                    Gender: ${patient.gender} |
                     Steps: ${steps} |
                 </div>
                 <figure id="viz" class="content_inset healthgraph detailed"></figure>
