@@ -42,10 +42,11 @@ public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiSer
 	IGenericClient client;
 
 	public DrishtiServiceImpl() {
+		super();
 		administrationService = Context.getAdministrationService();
-		String serverBase = administrationService.getGlobalProperty("omhOnFhirAPIBase", "/fhir") + "/ProcessBundle";
-		String urnSystem = administrationService.getGlobalProperty("urnSystem", "urn:system");
-		IGenericClient client = FhirContext.forDstu3().newRestfulGenericClient(serverBase);
+		serverBase = administrationService.getGlobalProperty("omhOnFhirAPIBase", "/fhir") + "/ProcessBundle";
+		urnSystem = administrationService.getGlobalProperty("urnSystem", "urn:system");
+		client = FhirContext.forDstu3().newRestfulGenericClient(serverBase);
 
 	}
 	/**
