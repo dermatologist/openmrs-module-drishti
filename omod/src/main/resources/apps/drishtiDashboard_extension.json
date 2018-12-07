@@ -1,0 +1,10 @@
+[
+  {
+    "id": "drishti.dashboard",
+    "extensionPointId": "patientDashboard.secondColumnFragments",
+    "extensionParams": {
+      "provider": "drishti",
+      "fragment": "hgraph"
+    }
+  }
+]
