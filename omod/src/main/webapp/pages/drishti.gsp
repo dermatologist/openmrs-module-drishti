@@ -1,10 +1,12 @@
 <% ui.decorateWith("appui", "standardEmrPage") %>
 
-Hello, world.
+Hello, Drishti user.
 
 <% if (context.authenticated) { %>
     And a special hello to you, $context.authenticatedUser.personName.fullName.
-    Your roles are:
+<a href="/owa/drishti/index.html">Click here to authenticate your cloud services.</a>
+
+Your roles in the system are:
     <% context.authenticatedUser.roles.findAll { !it.retired }.each { %>
         $it.role ($it.description)
     <% } %>

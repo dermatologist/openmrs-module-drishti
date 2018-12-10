@@ -1,0 +1,19 @@
+[
+  {
+    "id": "drishti.homepage",
+    "description": "Drishti mHealth",
+    "order": 10,
+    "extensions": [
+      {
+        "id": "drishti",
+        "extensionPointId": "org.openmrs.referenceapplication.homepageLink",
+        "type": "link",
+        "order": 20,
+        "label": "Drishti Homepage",
+        "url": "drishti/drishti.page",
+        "icon": "icon-user-md",
+        "requiredPrivilege": "View Providers"
+      }
+    ]
+  }
+]

@@ -19,8 +19,8 @@ public class DrishtiConfig {
 	
 	public final static String MODULE_PRIVILEGE = "Drishti Privilege";
 
-	public static final String APP_VIEW_PRIVILEGE_ROLE = "drishti.view";
-
+	public static final String APP_VIEW_PRIVILEGE_ROLE = "drishti.appview";
+	
 	public static final String APP_VIEW_PRIVILEGE_ROLE_DESCRIPTION = "Role to have access to the Drishti Module";
 
 	public static final String APP_VIEW_PRIVILEGE = "App: drishti";

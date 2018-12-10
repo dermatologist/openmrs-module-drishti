@@ -18,19 +18,19 @@ import org.openmrs.module.drishti.api.DrishtiService;
 
 public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiService {
 
-    FHIRRESTfulGenericClient fhirresTfulGenericClient = new FHIRRESTfulGenericClient();
+	FHIRRESTfulGenericClient fhirresTfulGenericClient = new FHIRRESTfulGenericClient();
 
-    /**
+	/**
 	 * Injected in moduleApplicationContext.xml
 	 */
 
-    @Override
-    public Bundle getBundle(org.openmrs.Patient patient) {
+	@Override
+	public Bundle getBundle(org.openmrs.Patient patient) {
 		return fhirresTfulGenericClient.getBundleClient(patient);
 	}
 
-    @Override
-    public Boolean saveCareplan(CarePlan carePlan, Patient patient) {
+	@Override
+	public Boolean saveCareplan(CarePlan carePlan, Patient patient) {
 		return fhirresTfulGenericClient.saveCareplanClient(carePlan, patient);
 	}
 }
