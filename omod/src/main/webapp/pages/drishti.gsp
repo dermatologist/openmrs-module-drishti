@@ -14,4 +14,3 @@ Your roles in the system are:
     You are not logged in.
 <% } %>
 
-${ ui.includeFragment("drishti", "users") }

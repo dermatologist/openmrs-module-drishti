@@ -21,6 +21,7 @@ public class DrishtiPageController {
             //Create a new patient
             // https://wiki.openmrs.org/questions/79660918/creating-a-patient-from-a-module
             // OpenMRS ID set as Not required in database
+            Context.clearSession();
             patient = new Patient(person);
             PatientIdentifierType PIT = patientService.getPatientIdentifierTypeByName("Old Identification Number");
             PatientIdentifier pI = new PatientIdentifier();
