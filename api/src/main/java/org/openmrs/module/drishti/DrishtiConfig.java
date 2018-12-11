@@ -28,5 +28,10 @@ public class DrishtiConfig {
 	public static final String VIEW_PROVIDER_PRIVILEGE = "View Providers";
 
 	public static final String VIEW_PATIENT_PRIVILEGE = "View Patients";
-	
+
+	public static final String GET_PATIENT_PRIVILEGE = "Get Patients";
+
+	public static final String ADD_PATIENT_PRIVILEGE = "Add Patients";
+
+	public static final String EDIT_PATIENT_PRIVILEGE = "Edit Patients";
 }

@@ -47,11 +47,11 @@ public class DrishtiActivator extends BaseModuleActivator {
 		log.info("Shutdown Drishti");
 	}
 
-	//    public static FhirContext getCtx() {
+    //    public static FhirContext getCtx() {
 	//        return ctx;
 	//    }
 
-	/**
+    /**
 	 * @see BaseModuleActivator#contextRefreshed()
 	 */
 	@Override
@@ -62,11 +62,11 @@ public class DrishtiActivator extends BaseModuleActivator {
 		//startFhirContext();
 	}
 
-	/**
+    /**
 	 * From patient portal toolkit
 	 */
 
-	private void ensureRolesAreCreated() {
+    private void ensureRolesAreCreated() {
 		UserService userService = Context.getUserService();
 		Role patientportalbasicrole = userService.getRole(DrishtiConfig.APP_VIEW_PRIVILEGE_ROLE);
 		if (patientportalbasicrole == null) {
@@ -76,12 +76,16 @@ public class DrishtiActivator extends BaseModuleActivator {
 			patientportalbasicrole.addPrivilege(userService.getPrivilege(DrishtiConfig.APP_VIEW_PRIVILEGE));
 			patientportalbasicrole.addPrivilege(userService.getPrivilege(DrishtiConfig.VIEW_PROVIDER_PRIVILEGE));
 			patientportalbasicrole.addPrivilege(userService.getPrivilege(DrishtiConfig.VIEW_PATIENT_PRIVILEGE));
+            patientportalbasicrole.addPrivilege(userService.getPrivilege(DrishtiConfig.GET_PATIENT_PRIVILEGE));
+            patientportalbasicrole.addPrivilege(userService.getPrivilege(DrishtiConfig.ADD_PATIENT_PRIVILEGE));
+            patientportalbasicrole.addPrivilege(userService.getPrivilege(DrishtiConfig.EDIT_PATIENT_PRIVILEGE));
+			
 			userService.saveRole(patientportalbasicrole);
 		}
 		userService.saveRole(patientportalbasicrole);
 	}
 
-	//    private void startFhirContext() {
+    //    private void startFhirContext() {
 	//        log.info("Starting FhirContext");
 	//        ctx = FhirContext.forDstu3();
 	//    }
