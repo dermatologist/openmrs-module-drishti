@@ -15,5 +15,7 @@
 ## Drishti is work in progress and is not ready for use.
 *  [Contact](https://nuchange.ca/contact)
 
+[![OpenMRS](https://raw.github.com/E-Health/drishti/develop/notes/openmrs.png)](http://nuchange.ca)
+
 ## Contributors
 * [Bell Eapen](https://nuchange.ca)
