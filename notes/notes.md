@@ -18,9 +18,9 @@ https://talk.openmrs.org/t/person-to-patient/13224/6
 https://github.com/openmrs/openmrs-core/blob/master/api/src/test/java/org/openmrs/api/PatientServiceTest.java#L713-L735
 
 Context.clearSession();
-
+```
 <property
     name="hibernate.enable_lazy_load_no_trans"
     value="true"/>
-    
+ ```   
     https://javarevisited.blogspot.com/2014/04/orghibernatelazyinitializationException-Could-not-initialize-proxy-no-session-hibernate-java.html
