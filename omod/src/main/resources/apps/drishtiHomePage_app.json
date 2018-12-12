@@ -12,7 +12,7 @@
         "label": "Drishti Homepage",
         "url": "drishti/drishti.page",
         "icon": "icon-user-md",
-        "requiredPrivilege": "View Providers"
+        "requiredPrivilege": "View Patients"
       }
     ]
   }
