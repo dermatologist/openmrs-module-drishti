@@ -10,7 +10,6 @@ import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentConfiguration;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 public class HgraphFragmentController {
@@ -30,7 +29,7 @@ public class HgraphFragmentController {
 
         Bundle bundle = drishtiService.getBundle(patient);
 
-        BigDecimal steps = new BigDecimal(0);
+        int steps = 0;
 		for (Bundle.BundleEntryComponent bundleEntryComponent : bundle.getEntry()) {
 			Resource resource = bundleEntryComponent.getResource();
 			if (resource instanceof Observation) {
@@ -42,8 +41,8 @@ public class HgraphFragmentController {
                         List<Observation.ObservationComponentComponent> components = ((Observation) resource).getComponent();
 						for (Observation.ObservationComponentComponent component : components) {
 							Quantity quantity = component.getValueQuantity();
-							//steps = steps + quantity.getValue();
-							steps = steps.add(quantity.getValue());
+                            //quantity.getValue() returns BigDecimal that is immutable
+                            steps += quantity.getValue().intValue();
 						}
 
                     }
@@ -52,6 +51,6 @@ public class HgraphFragmentController {
 		}
 
         model.addAttribute("patient", patient);
-		model.addAttribute("steps", steps.intValue());
+        model.addAttribute("steps", steps);
 	}
 }
