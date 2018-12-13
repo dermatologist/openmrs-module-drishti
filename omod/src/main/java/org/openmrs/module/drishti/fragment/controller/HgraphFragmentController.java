@@ -15,7 +15,8 @@ import java.util.List;
 public class HgraphFragmentController {
 
 	public void controller(FragmentConfiguration config, @SpringBean("patientService") PatientService patientService,
-						   FragmentModel model) throws Exception {
+                           @SpringBean("drishtiService") DrishtiService drishtiService,
+                           FragmentModel model) throws Exception {
 		// unfortunately in OpenMRS 2.1 the coreapps patient page only gives us a patientId for this extension point
 		// (not a patient) but I assume we'll fix this to pass patient, so I'll code defensively
 		Patient patient;
@@ -25,7 +26,9 @@ public class HgraphFragmentController {
 			patient = patientService.getPatient((Integer) config.getAttribute("patientId"));
 		else
 			patient = (Patient) (pt instanceof Patient ? pt : PropertyUtils.getProperty(pt, "patient"));
-		DrishtiService drishtiService = Context.getService(DrishtiService.class);
+
+        if (drishtiService == null)
+            drishtiService = Context.getService(DrishtiService.class);
 
 		Bundle bundle = drishtiService.getBundle(patient);
 
