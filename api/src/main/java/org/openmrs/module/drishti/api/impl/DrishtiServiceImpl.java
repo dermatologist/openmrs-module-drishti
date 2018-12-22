@@ -9,6 +9,8 @@
  */
 package org.openmrs.module.drishti.api.impl;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CarePlan;
 import org.hl7.fhir.dstu3.model.Patient;
@@ -18,6 +20,8 @@ import org.openmrs.module.drishti.api.DrishtiService;
 
 public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiService {
 
+    private Log log = LogFactory.getLog(this.getClass());
+
 	FHIRRESTfulGenericClient fhirresTfulGenericClient = new FHIRRESTfulGenericClient();
 
 	/**
@@ -26,6 +30,7 @@ public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiSer
 
 	@Override
 	public Bundle getBundle(org.openmrs.Patient patient) {
+        log.info("Getting Bundles for UUID: " + patient.getUuid());
 		return fhirresTfulGenericClient.getBundleClient(patient);
 	}
 

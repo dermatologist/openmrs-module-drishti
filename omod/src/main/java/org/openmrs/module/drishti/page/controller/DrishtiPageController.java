@@ -33,6 +33,7 @@ public class DrishtiPageController {
 			int randomNum = rand.nextInt((99999 - 80000) + 1) + 800000;
 			pI.setIdentifier(Integer.toString(randomNum));
 			patient.addIdentifier(pI);
+            patient.setUuid(Context.getAuthenticatedUser().getPerson().getUuid());
 			patientService.savePatient(patient);
 		}
 	}

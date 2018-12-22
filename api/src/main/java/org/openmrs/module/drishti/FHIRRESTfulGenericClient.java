@@ -3,6 +3,8 @@ package org.openmrs.module.drishti;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.rest.api.MethodOutcome;
 import ca.uhn.fhir.rest.client.api.IGenericClient;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.hl7.fhir.dstu3.model.Bundle;
 import org.hl7.fhir.dstu3.model.CarePlan;
 import org.hl7.fhir.dstu3.model.Patient;
@@ -10,12 +12,16 @@ import org.hl7.fhir.dstu3.model.Reference;
 
 public class FHIRRESTfulGenericClient {
 
+	private Log log = LogFactory.getLog(this.getClass());
+
 	private static final FhirContext ctx = FhirContext.forDstu3();
+
 
 	public Bundle getBundleClient(org.openmrs.Patient patient) {
 		IGenericClient client = ctx.newRestfulGenericClient(DrishtiConstants.FHIR_BASE);
+		log.info("Getting Bundles for UUID (REST): " + patient.getUuid());
 		Bundle bundle = client.search().forResource(Bundle.class)
-				.where(Bundle.IDENTIFIER.exactly().systemAndIdentifier(DrishtiConstants.URN_SYSTEM, patient.getPerson().getUuid()))
+				.where(Bundle.IDENTIFIER.exactly().systemAndIdentifier(DrishtiConstants.URN_SYSTEM, patient.getUuid()))
 				//.where(Observation.SUBJECT.hasId(patient.getId()))
 				.returnBundle(org.hl7.fhir.dstu3.model.Bundle.class).execute();
 		return bundle;
