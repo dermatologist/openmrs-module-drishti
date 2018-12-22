@@ -15,7 +15,7 @@ public class FHIRRESTfulGenericClient {
 	public Bundle getBundleClient(org.openmrs.Patient patient) {
 		IGenericClient client = ctx.newRestfulGenericClient(DrishtiConstants.FHIR_BASE);
 		Bundle bundle = client.search().forResource(Bundle.class)
-				.where(Bundle.IDENTIFIER.exactly().systemAndIdentifier(DrishtiConstants.URN_SYSTEM, patient.getUuid()))
+				.where(Bundle.IDENTIFIER.exactly().systemAndIdentifier(DrishtiConstants.URN_SYSTEM, patient.getPerson().getUuid()))
 				//.where(Observation.SUBJECT.hasId(patient.getId()))
 				.returnBundle(org.hl7.fhir.dstu3.model.Bundle.class).execute();
 		return bundle;
