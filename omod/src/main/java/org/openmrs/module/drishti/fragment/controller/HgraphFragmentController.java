@@ -31,7 +31,9 @@ public class HgraphFragmentController {
 		Bundle bundle = drishtiService.getBundle(patient);
 
 		int steps = 0;
-		for (Bundle.BundleEntryComponent bundleEntryComponent : bundle.getEntry()) {
+        Bundle insideBundle = (Bundle) bundle.getEntryFirstRep().getResource();
+
+        for (Bundle.BundleEntryComponent bundleEntryComponent : insideBundle.getEntry()) {
 			Resource resource = bundleEntryComponent.getResource();
 			if (resource instanceof Observation) {
 				//

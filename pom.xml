@@ -30,6 +30,14 @@
 
 	<dependencyManagement>
 		<dependencies>
+            <!-- Tests -->
+            <dependency>
+                <groupId>org.openmrs.test</groupId>
+                <artifactId>openmrs-test</artifactId>
+                <version>${openMRSVersion}</version>
+                <type>pom</type>
+                <scope>test</scope>
+            </dependency>
 			<!-- Importing versions from refapp distro -->
             <dependency>
                 <groupId>org.openmrs.distro</groupId>
@@ -150,5 +158,6 @@
         <hapiFhirStructuresDstuVersion>3.6.0</hapiFhirStructuresDstuVersion>
 		<slf4jApiVersion>1.6.0</slf4jApiVersion>
 		<slf4jLog4j12Version>1.6.0</slf4jLog4j12Version>
+        <openMRSVersion>2.0.4.1</openMRSVersion>
 	</properties>
 </project>

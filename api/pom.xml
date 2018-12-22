@@ -15,9 +15,21 @@
     <properties>
         <hapiFhirBaseVersion>3.6.0</hapiFhirBaseVersion>
         <hapiFhirStructuresDstuVersion>3.6.0</hapiFhirStructuresDstuVersion>
+        <openMRSVersion>2.0.4.1</openMRSVersion>
+
     </properties>
 
     <dependencies>
+
+        <!-- Tests -->
+        <dependency>
+            <groupId>org.openmrs.api</groupId>
+            <artifactId>openmrs-api</artifactId>
+            <version>${openMRSVersion}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-base</artifactId>

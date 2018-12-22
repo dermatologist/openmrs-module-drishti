@@ -13,6 +13,15 @@
 	<description>Omod submodule for Drishti</description>
 
 	<dependencies>
+        <!-- Tests -->
+        <dependency>
+            <groupId>org.openmrs.api</groupId>
+            <artifactId>openmrs-api</artifactId>
+            <version>${openMRSVersion}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>drishti-api</artifactId>
