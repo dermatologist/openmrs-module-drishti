@@ -30,7 +30,7 @@ public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiSer
 
 	@Override
 	public Bundle getBundle(org.openmrs.Patient patient) {
-        log.info("Getting Bundles for UUID: " + patient.getUuid());
+		log.warn("Getting Bundles for Patient UUID: " + patient.getUuid());
 		return fhirresTfulGenericClient.getBundleClient(patient);
 	}
 

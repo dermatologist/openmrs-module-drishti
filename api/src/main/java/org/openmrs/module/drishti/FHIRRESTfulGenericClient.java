@@ -29,6 +29,7 @@ public class FHIRRESTfulGenericClient {
 		List<User> users = userService.getUsersByName(patient.getGivenName(), patient.getFamilyName(), false);
 		String uuid = users.get(0).getUuid();
 
+		log.warn("Getting Bundles for User UUID: " + uuid);
 		Bundle bundle = client.search().forResource(Bundle.class)
 				.where(Bundle.IDENTIFIER.exactly().systemAndIdentifier(DrishtiConstants.URN_SYSTEM, uuid))
 				//.where(Observation.SUBJECT.hasId(patient.getId()))
