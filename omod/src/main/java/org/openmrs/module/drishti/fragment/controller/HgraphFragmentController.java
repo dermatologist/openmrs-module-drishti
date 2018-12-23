@@ -1,19 +1,10 @@
 package org.openmrs.module.drishti.fragment.controller;
 
-import org.apache.commons.beanutils.PropertyUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.hl7.fhir.dstu3.model.*;
 import org.openmrs.Patient;
-import org.openmrs.api.PatientService;
-import org.openmrs.api.context.Context;
 import org.openmrs.module.drishti.api.DrishtiService;
-import org.openmrs.ui.framework.annotation.FragmentParam;
-import org.openmrs.ui.framework.annotation.InjectBeans;
 import org.openmrs.ui.framework.annotation.SpringBean;
-import org.openmrs.ui.framework.fragment.FragmentConfiguration;
 import org.openmrs.ui.framework.fragment.FragmentModel;
-import org.openmrs.ui.framework.page.PageModel;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -68,9 +59,11 @@ public class HgraphFragmentController {
 	//		model.addAttribute("steps", steps);
 	//		model.addAttribute("debug", debug);
 	//	}
-	
-	public void controller(FragmentModel model, @FragmentParam("patientId") Patient patient,
-	        @SpringBean("drishti.DrishtiService") DrishtiService drishtiService) {
+
+    public void controller(FragmentModel model,
+                           //@FragmentParam("patientId") Patient patient,
+                           @RequestParam(value = "patientId", required = false) Patient patient,
+                           @SpringBean("drishti.DrishtiService") DrishtiService drishtiService) {
 		
 		String debug = "Getting Bundles for UUID (CONTROLLER): " + patient.getUuid();
 		

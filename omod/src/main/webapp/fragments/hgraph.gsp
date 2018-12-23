@@ -57,7 +57,7 @@
                                 actual: 0,
                                 weight: 0,
                                 details: []
-                            }
+                            };
                             var bp = {
                                 label: 'Blood Pressure',
                                 score: 0,
@@ -65,7 +65,7 @@
                                 actual: 0,
                                 weight: 0,
                                 details: []
-                            }
+                            };
                             if (json[0].gender === gender)
                                 factor_json = json[0].metrics;
                             else
@@ -86,8 +86,8 @@
                                     });
                                     if (cholesterol.details.length >= 3) {
                                         for (var j = 0; j < cholesterol.details.length; j++) {
-                                            cholesterol.score = cholesterol.score + cholesterol.details[j].score
-                                            cholesterol.actual = cholesterol.actual + cholesterol.details[j].actual
+                                            cholesterol.score = cholesterol.score + cholesterol.details[j].score;
+                                            cholesterol.actual = cholesterol.actual + cholesterol.details[j].actual;
                                             cholesterol.weight = cholesterol.weight + cholesterol.details[j].weight
                                         }
                                         cholesterol.score /= 3;
@@ -201,6 +201,7 @@
                 <div>
                     Gender: ${patient.gender} |
                     Steps: ${steps} |
+                    Debug: ${debug}
                 </div>
                 <figure id="viz" class="content_inset healthgraph detailed"></figure>
 
