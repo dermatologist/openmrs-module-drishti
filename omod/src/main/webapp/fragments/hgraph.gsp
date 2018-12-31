@@ -15,7 +15,7 @@
             });
         });
         jq("#but_act").click(function (e) {
-            window.location.href = "/act/user/${uuid}";
+            window.location.href = "/act/index.html#/user/${uuid}";
         });
 
 
