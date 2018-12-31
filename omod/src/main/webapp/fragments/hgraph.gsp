@@ -9,8 +9,18 @@
     var jq = jQuery;
     jq(document).ready(function () {
         jq("#tabs").tabs();
+        jq("#but_plan").click(function (e) {
+            jq.get("/plan/application/user/${uuid}", function (data) {
+
+            });
+        });
+        jq("#but_act").click(function (e) {
+            window.location.href = "/act/${uuid}";
+        });
+
 
     });
+
 </script>
 
 <script>
@@ -201,7 +211,7 @@
                 <div>
                     Gender: ${patient.gender} |
                     Steps: ${steps} |
-                    Debug: ${debug}
+                    UUID: ${uuid}
                 </div>
                 <figure id="viz" class="content_inset healthgraph detailed"></figure>
 
@@ -210,6 +220,12 @@
 
 
             <div id="careplan-tab" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+                <a class="button" id="but_plan">
+                    <i class="icon-upload-alt"></i>Plan
+                </a>
+                <a class="button" id="but_act">
+                    <i class="icon-download-alt"></i>Act
+                </a>
 
             </div>
 

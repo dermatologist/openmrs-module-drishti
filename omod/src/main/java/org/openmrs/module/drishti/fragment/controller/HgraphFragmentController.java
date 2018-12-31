@@ -2,6 +2,8 @@ package org.openmrs.module.drishti.fragment.controller;
 
 import org.hl7.fhir.dstu3.model.*;
 import org.openmrs.Patient;
+import org.openmrs.User;
+import org.openmrs.api.UserService;
 import org.openmrs.module.drishti.api.DrishtiService;
 import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
@@ -62,12 +64,16 @@ public class HgraphFragmentController {
 
     public void controller(FragmentModel model,
                            //@FragmentParam("patientId") Patient patient,
+                           @SpringBean("userService") UserService userService,
                            @RequestParam(value = "patientId", required = false) Patient patient,
                            @SpringBean("drishti.DrishtiService") DrishtiService drishtiService) {
-		
-		String debug = "Getting Bundles for UUID (CONTROLLER): " + patient.getUuid();
-		
-		Bundle bundle = drishtiService.getBundle(patient);
+
+        //String debug = "Getting Bundles for UUID (CONTROLLER): " + patient.getUuid();
+        List<User> users = userService.getUsersByName(patient.getGivenName(), patient.getFamilyName(), false);
+        String uuid = users.get(0).getUuid();
+
+
+        Bundle bundle = drishtiService.getBundle(patient);
 		
 		int steps = 10;
 		Bundle insideBundle = (Bundle) bundle.getEntryFirstRep().getResource();
@@ -96,6 +102,6 @@ public class HgraphFragmentController {
 		}
 		model.addAttribute("patient", patient);
 		model.addAttribute("steps", steps);
-		model.addAttribute("debug", debug);
+        model.addAttribute("uuid", uuid);
 	}
 }
