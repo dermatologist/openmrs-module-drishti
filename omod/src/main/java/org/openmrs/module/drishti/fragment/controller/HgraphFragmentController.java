@@ -9,6 +9,7 @@ import org.openmrs.ui.framework.annotation.SpringBean;
 import org.openmrs.ui.framework.fragment.FragmentModel;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Date;
 import java.util.List;
 
 public class HgraphFragmentController {
@@ -74,32 +75,37 @@ public class HgraphFragmentController {
 
 
         Bundle bundle = drishtiService.getBundle(patient);
-		
-		int steps = 10;
-		Bundle insideBundle = (Bundle) bundle.getEntryFirstRep().getResource();
-		
-		if (insideBundle != null) {
-			for (Bundle.BundleEntryComponent bundleEntryComponent : insideBundle.getEntry()) {
-				Resource resource = bundleEntryComponent.getResource();
-				if (resource instanceof Observation) {
-					//
-					List<Coding> codes = ((Observation) resource).getCode().getCoding();
-					for (Coding code : codes) {
-						if (code.getCode().equals("55423-8")) {
-							
-							List<Observation.ObservationComponentComponent> components = ((Observation) resource)
-							        .getComponent();
-							for (Observation.ObservationComponentComponent component : components) {
-								Quantity quantity = component.getValueQuantity();
-								//quantity.getValue() returns BigDecimal that is immutable
-								steps += quantity.getValue().intValue();
-							}
-							
-						}
-					}
-				}
-			}
-		}
+
+        int steps = 0;
+        // Bundle insideBundle = (Bundle) bundle.getEntryFirstRep().getResource();
+
+        Date yesterday = new Date(System.currentTimeMillis() - 1000L * 60L * 60L * 24L);
+
+        for (Bundle.BundleEntryComponent bundleEntryComponentMain : bundle.getEntry()) {
+            Bundle insideBundle = (Bundle) bundleEntryComponentMain.getResource();
+            if (insideBundle != null && !yesterday.after(insideBundle.getMeta().getLastUpdated())) {
+                for (Bundle.BundleEntryComponent bundleEntryComponent : insideBundle.getEntry()) {
+                    Resource resource = bundleEntryComponent.getResource();
+                    if (resource instanceof Observation) {
+                        //
+                        List<Coding> codes = ((Observation) resource).getCode().getCoding();
+                        for (Coding code : codes) {
+                            if (code.getCode().equals("55423-8")) {
+
+                                List<Observation.ObservationComponentComponent> components = ((Observation) resource)
+                                        .getComponent();
+                                for (Observation.ObservationComponentComponent component : components) {
+                                    Quantity quantity = component.getValueQuantity();
+                                    //quantity.getValue() returns BigDecimal that is immutable
+                                    steps += quantity.getValue().intValue();
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
 		model.addAttribute("patient", patient);
 		model.addAttribute("steps", steps);
         model.addAttribute("uuid", uuid);
