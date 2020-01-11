@@ -1,10 +1,13 @@
 <% ui.decorateWith("appui", "standardEmrPage") %>
 
-Hello, world.
+<p>Hello, Drishti user.</p>
 
 <% if (context.authenticated) { %>
-    And a special hello to you, $context.authenticatedUser.personName.fullName.
-    Your roles are:
+<p>And a special hello to you, $context.authenticatedUser.personName.fullName.</p>
+<a href="/openmrs/owa/drishti/index.html">Click here to authenticate your cloud services.</a>
+<br>
+<br>
+Your roles in the system are:
     <% context.authenticatedUser.roles.findAll { !it.retired }.each { %>
         $it.role ($it.description)
     <% } %>
@@ -12,4 +15,3 @@ Hello, world.
     You are not logged in.
 <% } %>
 
-${ ui.includeFragment("drishti", "users") }

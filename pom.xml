@@ -30,6 +30,14 @@
 
 	<dependencyManagement>
 		<dependencies>
+            <!-- Tests -->
+            <dependency>
+                <groupId>org.openmrs.test</groupId>
+                <artifactId>openmrs-test</artifactId>
+                <version>${openMRSVersion}</version>
+                <type>pom</type>
+                <scope>test</scope>
+            </dependency>
 			<!-- Importing versions from refapp distro -->
             <dependency>
                 <groupId>org.openmrs.distro</groupId>
@@ -38,6 +46,85 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+			<!-- slf4j -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4jApiVersion}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4jLog4j12Version}</version>
+				<scope>runtime</scope>
+			</dependency>
+
+
+            <dependency>
+                <groupId>ca.uhn.hapi.fhir</groupId>
+                <artifactId>hapi-fhir-base</artifactId>
+                <version>${hapiFhirBaseVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+            <dependency>
+                <groupId>ca.uhn.hapi.fhir</groupId>
+                <artifactId>hapi-fhir-structures-dstu3</artifactId>
+                <version>${hapiFhirStructuresDstuVersion}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.slf4j</groupId>
+                        <artifactId>slf4j-api</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>log4j</groupId>
+                        <artifactId>log4j</artifactId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+
+			<dependency>
+				<groupId>ca.uhn.hapi.fhir</groupId>
+				<artifactId>hapi-fhir-validation-resources-dstu3</artifactId>
+				<version>${hapiFhirStructuresDstuVersion}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<dependency>
+				<groupId>ca.uhn.hapi.fhir</groupId>
+				<artifactId>hapi-fhir-client</artifactId>
+				<version>${hapiFhirStructuresDstuVersion}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.slf4j</groupId>
+						<artifactId>slf4j-api</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 
@@ -67,5 +154,10 @@
 
 	<properties>
 		<openmrsPlatformVersion>1.11.6</openmrsPlatformVersion>
+        <hapiFhirBaseVersion>3.6.0</hapiFhirBaseVersion>
+        <hapiFhirStructuresDstuVersion>3.6.0</hapiFhirStructuresDstuVersion>
+		<slf4jApiVersion>1.6.0</slf4jApiVersion>
+		<slf4jLog4j12Version>1.6.0</slf4jLog4j12Version>
+        <openMRSVersion>2.0.4.1</openMRSVersion>
 	</properties>
 </project>

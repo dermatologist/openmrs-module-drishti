@@ -9,44 +9,33 @@
  */
 package org.openmrs.module.drishti.api.impl;
 
-import org.openmrs.api.APIException;
-import org.openmrs.api.UserService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.hl7.fhir.dstu3.model.Bundle;
+import org.hl7.fhir.dstu3.model.CarePlan;
+import org.hl7.fhir.dstu3.model.Patient;
 import org.openmrs.api.impl.BaseOpenmrsService;
-import org.openmrs.module.drishti.Item;
+import org.openmrs.module.drishti.FHIRRESTfulGenericClient;
 import org.openmrs.module.drishti.api.DrishtiService;
-import org.openmrs.module.drishti.api.dao.DrishtiDao;
 
 public class DrishtiServiceImpl extends BaseOpenmrsService implements DrishtiService {
-	
-	DrishtiDao dao;
-	
-	UserService userService;
-	
+
+    private Log log = LogFactory.getLog(this.getClass());
+
+	FHIRRESTfulGenericClient fhirresTfulGenericClient = new FHIRRESTfulGenericClient();
+
 	/**
 	 * Injected in moduleApplicationContext.xml
 	 */
-	public void setDao(DrishtiDao dao) {
-		this.dao = dao;
-	}
-	
-	/**
-	 * Injected in moduleApplicationContext.xml
-	 */
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-	
+
 	@Override
-	public Item getItemByUuid(String uuid) throws APIException {
-		return dao.getItemByUuid(uuid);
+	public Bundle getBundle(org.openmrs.Patient patient) {
+		log.warn("Getting Bundles for Patient UUID: " + patient.getUuid());
+		return fhirresTfulGenericClient.getBundleClient(patient);
 	}
-	
+
 	@Override
-	public Item saveItem(Item item) throws APIException {
-		if (item.getOwner() == null) {
-			item.setOwner(userService.getUser(1));
-		}
-		
-		return dao.saveItem(item);
+	public Boolean saveCareplan(CarePlan carePlan, Patient patient) {
+		return fhirresTfulGenericClient.saveCareplanClient(carePlan, patient);
 	}
 }
